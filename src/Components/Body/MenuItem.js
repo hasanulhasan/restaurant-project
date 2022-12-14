@@ -1,6 +1,7 @@
 import React from 'react';
 
-const MenuItem = () => {
+const MenuItem = (props) => {
+  console.log(props);
   return (
     <div>
 

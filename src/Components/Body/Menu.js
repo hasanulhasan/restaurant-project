@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import DISHES from '../../data/dishes/Dishes';
+import DISHES from '../../data/dishes/dishes';
+import MenuItem from './MenuItem';
 
 class Menu extends Component {
   state = {
     dishes: DISHES
   }
   render() {
+    const menu = this.state.dishes.map(item => {
+      return (
+        <MenuItem dish={item}>
+        </MenuItem>
+      )
+    })
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-6'>
-
+            {menu}
 
 
           </div>
