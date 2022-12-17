@@ -20,13 +20,13 @@ class Navigation extends Component {
         <Navbar dark color='dark' expand='sm'>
           <div className='container'>
             <NavbarToggler onClick={this.navToggle}></NavbarToggler>
-            <NavbarBrand href='/'>
+            <NavbarBrand href='/home'>
               Restaurant app
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav className='mr-auto'>
                 <NavItem>
-                  <Link to='/' className='nav-link active'>Home</Link>
+                  <Link to='/home' className='nav-link active'>Home</Link>
                 </NavItem>
                 <NavItem>
                   <Link to='/menu' className='nav-link'>Menu</Link>
