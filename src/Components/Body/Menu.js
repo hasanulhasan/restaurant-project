@@ -57,13 +57,6 @@ class Menu extends Component {
               <Button color='secondary' onClick={this.toggleModal}>Close</Button>
             </ModalFooter>
           </Modal>
-
-          {/* <div className='col-6'>
-            {menu}
-          </div>
-          <div className='col-6'>
-            {dishDetail}
-          </div> */}
         </div>
       </div>
     );
