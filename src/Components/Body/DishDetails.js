@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardBody, CardImg, CardText } from 'reactstrap';
+import CommentForm from './CommentForm';
 import LoadComment from './LoadComment';
 
 const DishDetails = (props) => {
@@ -15,7 +16,8 @@ const DishDetails = (props) => {
         </CardText>
         <hr />
         <LoadComment comments={props.comments}></LoadComment>
-
+        <hr />
+        <CommentForm></CommentForm>
       </Card>
 
     </div>

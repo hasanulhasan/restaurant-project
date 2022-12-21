@@ -6,7 +6,7 @@ import myStore from './redux/store';
 import router from './Routes/Router';
 
 function App() {
-  console.log('App.js:', myStore.getState());
+  // console.log('App.js:', myStore.getState());
   return (
     <div className="App">
       <Provider store={myStore}>
