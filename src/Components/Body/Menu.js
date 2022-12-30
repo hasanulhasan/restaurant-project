@@ -5,6 +5,8 @@ import { Button, CardColumns, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import DishDetails from './DishDetails';
 import MenuItem from './MenuItem';
 import { connect } from 'react-redux';
+import * as actiontypes from '../../redux/actionTypes'
+import { addComment } from '../../redux/actionCreator';
 
 const mapStateToProps = state => {
   // console.log('form map state', state); // mapToState make redux state to props of component
@@ -15,16 +17,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addComment: (dishId, rating, author, comment) => dispatch(
-      {
-        type: 'ADD_COMMENT',
-        payload: {
-          dishId: dishId,
-          author: author,
-          rating: rating,
-          comment: comment
-        }
-      }
+    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)
     )
   }
 }

@@ -5,6 +5,7 @@ import Contact from "../Components/Body/Contact";
 import Home from "../Components/Body/Home";
 import Menu from "../Components/Body/Menu";
 import MainComponent from "../Components/MainComponent";
+import Login from "../UserInfo/Login";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
         element: <About></About>
       },
       {
-        path: '/menu',
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/',
         element: <Menu></Menu>
       },
       {

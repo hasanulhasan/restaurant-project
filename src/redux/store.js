@@ -1,5 +1,6 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 import { Reducer } from './reducer';
 
-const myStore = createStore(Reducer);
+const myStore = createStore(Reducer, applyMiddleware(logger));
 export default myStore;
