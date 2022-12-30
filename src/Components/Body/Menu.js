@@ -6,7 +6,8 @@ import DishDetails from './DishDetails';
 import MenuItem from './MenuItem';
 import { connect } from 'react-redux';
 import * as actiontypes from '../../redux/actionTypes'
-import { addComment } from '../../redux/actionCreator';
+import { addComment, fetchDishes } from '../../redux/actionCreator';
+import Loading from './Loading';
 
 const mapStateToProps = state => {
   // console.log('form map state', state); // mapToState make redux state to props of component
@@ -18,7 +19,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)
-    )
+    ),
+    fetchDishes: () => dispatch(fetchDishes())
   }
 }
 
@@ -44,45 +46,58 @@ class Menu extends Component {
     })
   }
 
+  componentDidMount() {
+    this.props.fetchDishes();
+  }
+
   render() {
     document.title = 'Menu';
-    const menu = this.props.dishes.map(item => {
+    if (this.props.dishes.isLoading) {
       return (
-        <MenuItem
-          dish={item}
-          key={item.id}
-          onDishSelect={() => this.onDishSelect(item)}>
-        </MenuItem>
-      )
-    });
-
-    let dishDetail = null;
-    if (this.state.selectedDish != null) {
-      const comments = this.props.comments.filter(comment => comment.dishId === this.state.selectedDish.id)
-      dishDetail =
-        <DishDetails
-          dish={this.state.selectedDish}
-          comments={comments}
-          addComment={this.props.addComment}
-        ></DishDetails>
+        <Loading />
+      );
     }
-    return (
-      <div className='container'>
-        <div className='row'>
-          <CardColumns>
-            {menu}
-          </CardColumns>
-          <Modal isOpen={this.state.modalOpen}>
-            <ModalBody>
-              {dishDetail}
-            </ModalBody>
-            <ModalFooter>
-              <Button color='secondary' onClick={this.toggleModal}>Close</Button>
-            </ModalFooter>
-          </Modal>
+    else {
+      const menu = this.props.dishes.dishes.map(item => {
+        return (
+          <MenuItem
+            dish={item}
+            key={item.id}
+            onDishSelect={() => this.onDishSelect(item)}>
+          </MenuItem>
+        )
+      });
+
+      let dishDetail = null;
+      if (this.state.selectedDish != null) {
+        const comments = this.props.comments.filter(comment => comment.dishId === this.state.selectedDish.id)
+        dishDetail =
+          <DishDetails
+            dish={this.state.selectedDish}
+            comments={comments}
+            addComment={this.props.addComment}
+          ></DishDetails>
+      }
+      return (
+        <div className='container'>
+          <div className='row'>
+            <CardColumns>
+              {menu}
+            </CardColumns>
+            <Modal isOpen={this.state.modalOpen}>
+              <ModalBody>
+                {dishDetail}
+              </ModalBody>
+              <ModalFooter>
+                <Button color='secondary' onClick={this.toggleModal}>Close</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
         </div>
-      </div>
-    );
+      );
+
+    }
+
   }
 };
 
