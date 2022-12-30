@@ -9,6 +9,7 @@ const LoadComment = (props) => {
         <div key={comment.id} style={{ padding: '5px' }}>
           <h3>{comment.id}</h3>
           <CardText>{comment.comment}</CardText>
+          <CardText>Rating: {comment.rating}</CardText>
           <CardText>{dateFormat(comment.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</CardText>
         </div >
       );

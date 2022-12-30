@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, CardColumns, Modal, ModalBody, ModalFooter } from 'reactstrap';
-import DISHES from '../../data/dishes/dishes';
-import COMMENTS from '../../data/dishes/comments';
+// import DISHES from '../../data/dishes/dishes';
+// import COMMENTS from '../../data/dishes/comments';
 import DishDetails from './DishDetails';
 import MenuItem from './MenuItem';
 import { connect } from 'react-redux';
@@ -11,6 +11,21 @@ const mapStateToProps = state => {
   return {
     dishes: state.dishes,
     comments: state.comments
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    addComment: (dishId, rating, author, comment) => dispatch(
+      {
+        type: 'ADD_COMMENT',
+        payload: {
+          dishId: dishId,
+          author: author,
+          rating: rating,
+          comment: comment
+        }
+      }
+    )
   }
 }
 
@@ -55,6 +70,7 @@ class Menu extends Component {
         <DishDetails
           dish={this.state.selectedDish}
           comments={comments}
+          addComment={this.props.addComment}
         ></DishDetails>
     }
     return (
@@ -77,4 +93,4 @@ class Menu extends Component {
   }
 };
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

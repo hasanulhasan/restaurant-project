@@ -18,11 +18,17 @@ class CommentForm extends Component {
     })
   }
   handleSubmit = e => {
-    console.log(this.state)
+    // console.log(this.state);
+    this.props.addComment(this.props.dishId, this.state.rating, this.state.author, this.state.comment)
+    this.setState({
+      author: '',
+      rating: '',
+      comment: ''
+    })
     e.preventDefault()
-
   }
   render() {
+    // console.log(this.props)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
