@@ -16,7 +16,7 @@ const DishDetails = (props) => {
           <p>Price: ${props.dish.price}</p>
         </CardText>
         <hr />
-        <LoadComment comments={props.comments}></LoadComment>
+        <LoadComment comments={props.comments} commentIsLoading={props.commentIsLoading}></LoadComment>
         <hr />
         <CommentForm dishId={props.dish.id} addComment={props.addComment}></CommentForm>
       </Card>

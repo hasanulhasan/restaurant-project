@@ -1,8 +1,12 @@
 import React from 'react';
 import dateFormat from 'dateformat';
 import { CardText } from 'reactstrap';
+import Loading from './Loading';
 
 const LoadComment = (props) => {
+  if (props.commentIsLoading) {
+    return <Loading></Loading>
+  }
   return (
     props.comments.map(comment => {
       return (

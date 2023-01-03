@@ -25,7 +25,7 @@ const dishReducer = (dishState = { isLoading: false, dishes: [] }, action) => {
   }
 }
 
-const commentReducer = (commentState = COMMENTS, action) => {
+const commentReducer = (commentState = { isLoading: false, dishes: [] }, action) => {
   // if (action.type === 'ADD_COMMENT') {
   //   let comment = action.payload;
   //   comment.id = commentState.length;
@@ -35,6 +35,22 @@ const commentReducer = (commentState = COMMENTS, action) => {
   // return commentState;
 
   switch (action.type) {
+
+    case actiontypes.COMMENT_LOADING:
+      return {
+        ...commentState,
+        isLoading: true,
+        comments: []
+      }
+      break;
+    case actiontypes.LOAD_COMMENTS:
+      return {
+        ...commentState,
+        isLoading: false,
+        comments: action.payload
+      }
+      break;
+
     case actiontypes.ADD_COMMENT:
       let comment = action.payload;
       comment.id = commentState.length;
