@@ -53,9 +53,10 @@ const commentReducer = (commentState = { isLoading: false, dishes: [] }, action)
 
     case actiontypes.ADD_COMMENT:
       let comment = action.payload;
-      comment.id = commentState.length;
-      comment.date = new Date().toDateString();
-      return commentState.concat(comment)
+      return {
+        ...commentState,
+        comments: commentState.comments.concat(comment)
+      }
       break;
 
     default:
