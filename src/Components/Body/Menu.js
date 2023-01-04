@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, CardColumns, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import { Alert, Button, CardColumns, Modal, ModalBody, ModalFooter } from 'reactstrap';
 // import DISHES from '../../data/dishes/dishes';
 // import COMMENTS from '../../data/dishes/comments';
 import DishDetails from './DishDetails';
@@ -58,6 +58,9 @@ class Menu extends Component {
       return (
         <Loading />
       );
+    }
+    else if (this.props.dishes.errMsg != null) {
+      return <Alert color='danger'>{this.props.dishes.errMsg}</Alert>
     }
     else {
       const menu = this.props.dishes.dishes.map(item => {

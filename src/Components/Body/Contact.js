@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { Form } from 'react-router-dom';
-import { Button, Col, FormGroup, Input, Label } from 'reactstrap';
+import { Alert, Button, Col, FormGroup, Input, Label } from 'reactstrap';
+import { baseUrl } from '../../redux/baseUrl';
 
 class Contact extends Component {
   constructor(props) {
@@ -12,7 +14,10 @@ class Contact extends Component {
       email: '',
       agree: false,
       contactType: 'Tel',
-      message: ''
+      message: '',
+      alertShow: false,
+      alertText: null,
+      alertType: null
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,9 +30,37 @@ class Contact extends Component {
     })
   }
   handleSubmit = e => {
-    console.log(this.state);
     e.preventDefault();
+    // console.log(this.state);
+    axios.post(baseUrl + 'feedback', this.state)
+      .then(res => res.status)
+      .then(status => {
+        if (status === 201) {
+          this.setState({
+            alertShow: true,
+            alertText: "Submitted Successfully",
+            alertType: 'success'
+          });
+          setTimeout(() => {
+            this.setState({
+              alertShow: false
+            })
+          }, 1500)
+        }
+      })
+      .catch(err => {
+        this.setState({
+          alertShow: true,
+          alertText: err.message,
+          alertType: 'danger'
+        });
+        setTimeout(() => {
+          this.setState({
+            alertShow: false
+          })
+        }, 1500)
 
+      })
   }
   render() {
     document.title = 'Contact';
@@ -37,6 +70,7 @@ class Contact extends Component {
           <div className='row row-content' style={{ paddingLeft: '20px', textAlign: 'left' }}></div>
           <div className='col-12'>
             <h3>Send your feedback</h3>
+            <Alert isOpen={this.state.alertShow} color={this.state.alertType}>{this.state.alertText}</Alert>
           </div>
           <div className='col-12 col-md-7'>
             <Form onSubmit={this.handleSubmit}>
